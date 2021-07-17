@@ -1,56 +1,46 @@
-/*This source code copyrighted by Lazy Foo' Productions (2004-2020)
-and may not be redistributed without written permission.*/
-
-//Using SDL and standard IO
-#include <SDL2/SDL.h>
+#include "SDL2/SDL.h"
 #include <stdio.h>
 
-//Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+int main(int argc, char* argv[]) {
 
-int main( int argc, char* args[] )
-{
-	//The window we'll be rendering to
-	SDL_Window* window = NULL;
-	
-	//The surface contained by the window
-	SDL_Surface* screenSurface = NULL;
+SDL_Window *window;                    // Declare a pointer
 
-	//Initialize SDL
-	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
-	{
-		printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
-	}
-	else
-	{
-		//Create window
-		window = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-		if( window == NULL )
-		{
-			printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
-		}
-		else
-		{
-			//Get window surface
-			screenSurface = SDL_GetWindowSurface( window );
+SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
 
-			//Fill the surface white
-			SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0xFF, 0xFF, 0xFF ) );
-			
-			//Update the surface
-			SDL_UpdateWindowSurface( window );
+// Create an application window with the following settings:
+window = SDL_CreateWindow(
+    "An SDL2 window",                  // window title
+    SDL_WINDOWPOS_UNDEFINED,           // initial x position
+    SDL_WINDOWPOS_UNDEFINED,           // initial y position
+    640,                               // width, in pixels
+    480,                               // height, in pixels
+    SDL_WINDOW_OPENGL                  // flags - see below
+);
 
-			//Wait two seconds
-			SDL_Delay( 2000 );
-		}
-	}
+// Check that the window was successfully created
+if (window == NULL) {
+    // In the case that the window could not be made...
+    printf("Could not create window: %s\n", SDL_GetError());
+    return 1;
+}
 
-	//Destroy window
-	SDL_DestroyWindow( window );
+// A basic main loop to prevent blocking
+bool is_running = true;
+SDL_Event event;
+while (is_running) {
+    while (SDL_PollEvent(&event)) {
+        if (event.type == SDL_QUIT) {
+            is_running = false;
+        }
+    }
+    SDL_Delay(16);
+}
 
-	//Quit SDL subsystems
-	SDL_Quit();
+// Close and destroy the window
+SDL_DestroyWindow(window);
 
-	return 0;
+// Clean up
+SDL_Quit();
+return 0;
+
 }
