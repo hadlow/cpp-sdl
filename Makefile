@@ -1,7 +1,7 @@
-OBJS = src/main.cpp
+OBJS = src/main.cpp src/game.h src/game.cpp
 
 # CC specifies which compiler we're using
-CC = clang
+CC = clang++
 
 # COMPILER_FLAGS specifies the additional compilation options we're using
 COMPILER_FLAGS = 

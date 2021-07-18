@@ -3,11 +3,11 @@
 const int WINDOW_WIDTH = 1366;
 const int WINDOW_HEIGHT = 768;
 
-Game game* = nullptr;
+Game *game = nullptr;
 
 int main(int argc, char* argv[])
 {
-	game = new Game("Window", SDL_WINDOW_POS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, false);
+	game = new Game("Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, false);
 
 	while(game->running())
 	{

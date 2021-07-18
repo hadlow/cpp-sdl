@@ -8,7 +8,7 @@
 class Game
 {
 	public:
-		Game();
+		Game(const char* title, int x_position, int y_position, int width, int height, bool fullscreen);
 
 		~Game();
 
@@ -28,6 +28,6 @@ class Game
 		SDL_Window *window;
 
 		SDL_Renderer *renderer;
-}
+};
 
 #endif
