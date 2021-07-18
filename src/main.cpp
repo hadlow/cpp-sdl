@@ -1,48 +1,22 @@
-#include "SDL2/SDL.h"
-#include <stdio.h>
+#include "Game.h"
 
 const int WINDOW_WIDTH = 1366;
 const int WINDOW_HEIGHT = 768;
 
+Game game* = nullptr;
+
 int main(int argc, char* argv[])
 {
-	SDL_Window *window;
-	SDL_Init(SDL_INIT_VIDEO);
+	game = new Game("Window", SDL_WINDOW_POS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, false);
 
-	window = SDL_CreateWindow(
-		"Billy's Window",
-		SDL_WINDOWPOS_UNDEFINED,
-		SDL_WINDOWPOS_UNDEFINED,
-		WINDOW_WIDTH,
-		WINDOW_HEIGHT,
-		SDL_WINDOW_OPENGL
-	);
-
-	if(window == NULL)
+	while(game->running())
 	{
-		printf("Could not create window: %s\n", SDL_GetError());
-
-		return 1;
+		game->handle_events();
+		game->update();
+		game->render();
 	}
 
-	bool is_running = true;
-	SDL_Event event;
-
-	while(is_running)
-	{
-		while(SDL_PollEvent(&event))
-		{
-			if(event.type == SDL_QUIT)
-			{
-				is_running = false;
-			}
-		}
-
-		SDL_Delay(16);
-	}
-
-	SDL_DestroyWindow(window);
-	SDL_Quit();
+	game->clean();
 
 	return 0;
 }
