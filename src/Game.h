@@ -1,7 +1,8 @@
 #ifndef Game_h
 #define Game_h
 
-#include <stdio.h>
+#include <iostream>
+
 #include "SDL2/SDL.h"
 
 class Game
@@ -22,7 +23,11 @@ class Game
 		bool running();
 
 	private:
+		bool is_running;
 
+		SDL_Window *window;
+
+		SDL_Renderer *renderer;
 }
 
 #endif
