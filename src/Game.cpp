@@ -50,7 +50,7 @@ void Game::render()
 void Game::clean()
 {
 	SDL_DestroyWindow(window);
-	SDL_DestoryRenderer(renderer);
+	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
 }
 
@@ -70,7 +70,7 @@ void Game::handle_events()
 	}
 }
 
-void Game::running()
+bool Game::running()
 {
 	return is_running;
 }

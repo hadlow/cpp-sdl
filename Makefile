@@ -1,4 +1,4 @@
-OBJS = src/main.cpp src/game.h src/game.cpp
+OBJS = src/main.cpp src/game.cpp
 
 # CC specifies which compiler we're using
 CC = clang++
