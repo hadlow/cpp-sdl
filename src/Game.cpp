@@ -21,7 +21,6 @@ Game::Game(const char* title, int x_position, int y_position, int width, int hei
 
 			if(renderer)
 			{
-				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 				is_running = true;
 			}
 		}
@@ -42,7 +41,13 @@ void Game::update()
 
 void Game::render()
 {
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(renderer);
+
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+	SDL_RenderDrawLine(renderer, 320, 200, 300, 240);
+	SDL_RenderDrawLine(renderer, 300, 240, 340, 240);
+	SDL_RenderDrawLine(renderer, 340, 240, 320, 200);
 
 	SDL_RenderPresent(renderer);
 }
